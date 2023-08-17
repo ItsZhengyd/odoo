@@ -34,11 +34,19 @@
                 <label for="confirm_password">Confirm Password</label>
                 <input type="password" name="confirm_password" id="confirm_password" class="form-control form-control-sm" required="required"/>
             </div>
+
+            <div class="mb-3 field-privacy_policy">
+                <label for="privacy_policy">
+                    <input type="checkbox" name="privacy_policy" required="required"/>
+                    我同意 <a href="/privacy" target="_blank">隐私政策</a> 和
+                    <a href="/register_protocol" target="_blank">注册协议</a>.
+                </label>
+            </div>
         </template>
 
         <template id="auth_signup.signup" name="Sign up login">
             <t t-call="web.login_layout">
-                <form class="oe_signup_form" role="form" method="post" t-if="not message">
+                <form class="oe_signup_form" role="form" method="post" t-if="not message" data-privacy_policy-required="true">
                   <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 
                     <t t-call="auth_signup.fields">
@@ -50,8 +58,9 @@
                     </p>
                     <input type="hidden" name="redirect" t-att-value="redirect"/>
                     <input type="hidden" name="token" t-att-value="token"/>
+
                     <div class="text-center oe_login_buttons d-grid pt-3">
-                        <button type="submit" class="btn btn-primary"> Sign up</button>
+                        <button type="submit" class="btn btn-primary" > Sign up</button>
                         <a t-attf-href="/web/login?{{ keep_query() }}" class="btn btn-link btn-sm" role="button">Already have an account?</a>
                         <div class="o_login_auth"/>
                     </div>
